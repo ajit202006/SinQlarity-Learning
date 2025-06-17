@@ -1,1 +1,1 @@
-# -SinQlarity-Learning-
+# SinQlarity-Learning
