@@ -1,0 +1,72 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    display: flex;
+    justify-content: center;
+}
+form{
+    border-radius: 5px;
+    padding: 20px;
+    margin: 30px 0px; 
+    box-shadow: 4px 3px 15px rgb(178, 178, 178);
+}
+h1{
+    font-size: 25px;
+    justify-self: center;
+    font-family: 'calibri';
+    color: rgb(121, 8, 226);
+    text-decoration: underline rgb(37, 144, 2) ;
+}
+label{
+    padding-bottom: 5px;
+    font-family: sans-serif;
+    font-size: 13px;
+    color: rgb(151, 34, 73);
+}
+.formitem{
+    margin: 20px;
+    padding: 10px 10px;
+    box-shadow: 2px 2px 5px grey;
+    border-left: rgb(199, 3, 244) solid 3px;
+    border-radius: 5px ;
+    display: flex;
+    flex-direction: column;
+}
+input{
+    border:none;
+    border-bottom: 1.5px solid rgb(30, 188, 199);
+    outline: none;
+}
+input:focus{
+    border-bottom: 1.5px solid rgb(64, 13, 158);
+}
+
+.gender {
+    display: inline-block;
+    width: 81%;
+}
+.gender h3{
+    font-family: sans-serif;
+    font-size: 13px;
+    color: rgb(151, 34, 73);
+    font-weight: normal;
+}
+.gender label{
+    margin: 10px 10px;
+}
+.gender input{
+    position: relative;
+    top: 3.2px;
+}
+.resume input{
+    border: none;
+}
+input[type=submit]{
+    border:black 1px solid;
+    padding: 5px 7px;
+    border-radius: 3px;
+    position: relative;
+    margin: 0px 150px;
+}
