@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Input in Javascript using Input Boxes of html</title>
+</head>
+<body>
+    <input type="number" id="n1">
+    <input type="number" id="n2">
+    <button id="add">Add</button>
+    <script>
+        function addOnClick(){
+            let n1=document.getElementById('n1');
+            let n2=document.getElementById('n2');
+            n1=parseInt(n1.value);
+            n2=parseInt(n2.value);
+            alert(n1+n2);
+        }
+        let btn=document.getElementById('add');
+        
+        btn.onclick=addOnClick;
+        // btn.addEventListener('click',addOnClick);
+    </script>
+</body>
+</html>
