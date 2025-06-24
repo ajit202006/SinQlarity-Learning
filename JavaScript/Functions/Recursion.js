@@ -12,6 +12,19 @@ function printSeries(num){
 printSeries(6); //Function call
 
 
+// Using Recursion to print a series of even numbers
+// Using arguments.callee() Function
+console.log("----------Even Number Series-----------");
+function printSeries(num){
+    // Base Case
+    if (num==0){
+        return ;
+    }
+    arguments.callee(num-2);// Recursive Statement
+    console.log(num);
+}
+
+printSeries(20); //Function call
 
 
 // Using Recursion to print Factorial of a number ( Function Expression )
@@ -26,3 +39,4 @@ let doFactorial=function  fact(num){
 }
 let num=9;
 console.log(`Factorial of ${num} is ${doFactorial(num)}`);// function call 
+
