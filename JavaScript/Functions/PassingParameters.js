@@ -24,3 +24,15 @@ arr=[4,5,6,7];
 console.log("Array before funtion call =",arr);// Value also changed globally
 changeReferedVal(arr);
 console.log("Array after funtion call =",arr);// Value also changed globally
+
+
+// Default parameters in functions
+// the values that are passed to a function when argument is not passed for parameter is default parameter
+console.log("\n-----Default Parameter------");
+function addTwoNumbers(a,b=10){
+    return a+b;
+}
+console.log(addTwoNumbers(9,14)); // when we pass two numbers their sum will get output
+console.log(addTwoNumbers(9)); // when we pass one number then 10 will be added to it because it is the default parameter 
+
+// sequence of arguments should always match the sequence of parameters
