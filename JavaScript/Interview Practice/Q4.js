@@ -14,7 +14,6 @@ function nextDate(){
 }
 
 let date=new Date();
-console.log(date);
 date.nextDate=nextDate;
 
 console.log(date.nextDate())
