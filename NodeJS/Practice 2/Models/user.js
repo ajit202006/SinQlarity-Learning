@@ -40,3 +40,16 @@ module.exports.update=async (userData)=>{
         return false;
     }
 }
+
+// Deleting a value
+module.exports.delete=async (userData)=>{
+    let query ="delete from users where id=?";
+    //deleting the record with given id 
+    try {
+        await db.execute(query,[userData.id]);
+        return true;
+    }catch (error){
+        console.log(error);
+        return false;
+    }
+}
