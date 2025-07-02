@@ -28,3 +28,15 @@ module.exports.get= async (userData)=>{
     }
     return data;
 }
+
+// Updating a value
+module.exports.update=async (userData)=>{
+    let query=`Update users set password =? where id=?`;
+    try {
+        await db.execute(query,[userData.password,userData.id]);
+        return true;
+    }catch (error){
+        console.log(error);
+        return false;
+    }
+}
