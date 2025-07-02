@@ -24,7 +24,12 @@ module.exports.get=async (req,res)=>{
 
 //update
 module.exports.update=(req,res)=>{
-    res.send("Updating...");
+    let updated=userModel.update(req.body);
+    if (updated){
+        res.send({status:"Success", newPassword:req.body.password});
+    }else{
+        res.send({status:"Failed",message:"Cannot update user."});
+    }
 }
 
 //delete
