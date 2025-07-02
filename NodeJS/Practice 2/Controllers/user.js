@@ -33,6 +33,11 @@ module.exports.update=(req,res)=>{
 }
 
 //delete
-module.exports.delete=(req,res)=>{
-    res.send("Deleting from the database.....");
+module.exports.delete=async ( req,res)=>{
+    let status= await userModel.delete(req.body);
+    if (status){
+        res.send({status:"Success",message:"User deleted from the database"});
+    }else{
+        res.send({status:"Failed",message:"Cannot delete user."})
+    }
 }
