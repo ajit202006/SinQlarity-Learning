@@ -1,0 +1,64 @@
+Q-1. What is NodeJS ?
+Ans. JavaScript Runtime evnironment
+     Runs on chrome V8 engine
+     Helps to run JavaScript on server
+     Can access files and folder from your system
+     Cannot access elements of html file that Vanilla js can access.
+     It is asynchronous event-driven programmming language
+
+Q-2. When to use NodeJS ?
+Ans. Event based realtime web applications
+     Chat applications
+     Streaming servers
+
+     *Not Useful for 
+       - Long processing time
+       - ML or Data Mining
+
+Q-3. Why NodeJs?
+Ans. Single threaded - hence faster than other languages
+     Single language for whole stack 
+      - MERN or -MEAN stack
+     Easy for developers to learn and switch to different ends of application
+     Real-time data processing.
+
+Q-4. Client - Server Interaction.
+Ans. Client => 
+            - html
+            - css
+            - js
+            - input validation
+     Server => 
+            - NodeJs
+            - Request -> sent from CLIENT to SERVER
+            - Response -> sent from SERVER to CLIENT
+            - Authentication -> input validation and website entry
+            - Authorization -> access to functions or portions of website
+            - Business Logic -> Code and logic of website creation
+
+Q-5. SQL vs NoSQL
+Ans. NoSQL => read more write less (faster for reading)
+     SQL => write more read less (faster for writing)
+
+Q-6. What is REPL ?
+Ans. R -> Read => Converts input data into JavaScript data
+     E -> Eval => Evaluates the user input 
+     P -> Print => Generates the output for the user
+     L -> Loop => Continuous but breakable loop of above three concepts
+
+Q-7. What is Event Loop ?
+Ans. Event loop:- 
+        => Because of event loop model JavaScript never blocks
+        => Responsible for executing code
+        => Collection and processing events
+        => Executing queue subtasks
+
+        * Worker Pool > 
+            - Performs intensive operations
+            - Performs computation for file system and database
+            - Different worker pools works parallely
+            - REGISTER CALLBACK -> When event loop sends request to worker pool for execution
+            - OPERATIION COMPLETE -> When worker pool sends result to event loop
+        * Loop queue >
+            - Remembers the sequence in which requests are sent
+            - Waits synchronously for message and sends it to processing
