@@ -62,3 +62,130 @@ Ans. Event loop:-
         * Loop queue >
             - Remembers the sequence in which requests are sent
             - Waits synchronously for message and sends it to processing
+
+Q-8. What is a Call()?
+Ans. Call() provides new value of this to a function
+     With call you can inherit a method.
+
+Q-9. Synchronous and asynchronous 
+Ans. SYNCHRONOUS -> linear execution of code, line by line.
+     ASYNCHRONOUS -> parallel execution of independant code.
+
+Q-10. What is callback ?
+Ans. Passing a function as argument to another function
+     Asynchronous equivalent of a function
+     Helps in non blocking code
+     Helps to prevent flow of the single threaded NodeJS event loop
+
+Q-11. What is callback hell ?
+Ans. State where nested callbacks are made.
+     when one callback does another callback which is doing another callback and this goes on for a long chain
+     Also call "Pyramid of Doom"
+     - Avoid callback hell
+        => async and await
+        => Promise
+        => Breaking callbacks into multiple modules
+
+Q-12. How to handle callback hell?
+Ans. Ways to prevent callback hell:-
+     -> Modularize your code
+     -> Used named functions instead of anonymous functions
+     -> Use promise, async-await for cleaner code
+     -> Use control flow libraries like async.js
+     -> Use higher order functions instead of creating your own callback function
+
+Q-13. What is Sphagetti code ?
+Ans. Sphagetti code is when the code is :- 
+          => Unstructured
+          => Highly dependent on global variables 
+          => Deeply nested
+          => Not properly documented
+          => Not modularized appropriately
+
+Q-14. What is exception?
+Ans. -> Any unexpected or exeptional condition
+     -> Disrupts normal flow of code
+     -> Caused by runtime,logical or system errors
+     -> Leads to unintended behaviour 
+     -> NodeJS exception handling mechanism (try..catch)
+     -> Crucial for software reliability
+
+Q-15. Types of exception handling.
+Ans. Try...catch 
+     Error-first callback pattern
+     Promise catch
+     Async-await try...catch
+     Uncaught exception handling
+     Unhandled Promise rejection handling
+
+
+Q-16. What can break the event loop?  ///////// VIP Question //////////
+Ans. => Any Synchronous CPU intensive operation can break the event loop.
+     => Unhandled exception or uncaught exception 
+     => Excessive performing synchronous operation
+     => Infinite loop or recursion
+     => Blocking event loop with long running tasks
+
+Q-17. What is Anti-patterns?
+Ans. Coding practices that feel like quick fixes but may lead to long term issues
+     They include things like :-
+          -> GOD Object
+          -> Sphagetti Code
+          -> Magic Numbers
+          -> Copy Paste coding
+
+Q-18. Buffer vs Stream.
+Ans. # Buffer
+          -> Buffer in NodeJS is a storage area for chunk of binary data.
+          -> Buffers are typically used to work with binary data that is not streaming
+          -> Used for handling I/O operations, like reading a file when large amount of data is needed to be processed at once.
+          -> Used to process small files or images
+
+          Data Processing
+          => Works on whole data at once.
+          => Needs to wait for whole data to arrive before processing.
+          => Efficient to work with small files.
+          
+
+     # Stream
+          -> Stream is continuous flow of data.
+          -> Streams are used when data can be processed piece by piece
+          -> Useful to work with large files and network requests.
+          -> Used to process large files and handle HTTP requests
+
+          Data Processing
+          => Allows data to be processed in chunks as it arrives.
+          => Streams don't load whole data at once , processes data in chunks. Hence, it is memory efficient.
+          => Efficient to work with large files.
+
+          Types of Stream:-
+          => Read 
+          => Write
+          => Duplex
+          => Transform
+
+Q-19. What is observables?
+Ans. A stream of data that emits a series of value unlike promises that emits single value at a time.
+     Can handle multiple values and events.
+
+Q-20. Package.json vs Package-lock.json
+Ans. Package.json
+     => Contains project metadata
+     => Dependency declaration
+     * Tells npm what dependencies that it needs to load
+          Features:-
+          => Human readable 
+          => flexible
+     package-lock.json
+     => dependency locking
+     => records the exact versions of installed dependencies and their integrity hashes
+     => machine readable
+     => Used to ensure consistent installation acroos different versions
+     => Preventing unexpected behaviour due to version change
+     * Tells npm exactly what versions of those dependencies are needed to be installed.
+
+Q-21. What is next()?
+Ans. A function passed as the third argument in the middleware
+     Controls the flow of request - response cycle
+     * Purpose of next()
+       -> Coninuing reques-response cycle
