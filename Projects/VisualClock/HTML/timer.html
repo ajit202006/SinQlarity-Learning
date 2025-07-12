@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Clock</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <ul>
+            <li><a href="stopwatch.html"><button>Stopwatch</button></a></li>
+            <li><a href="../index.html"><button>Clock</button></a></li>
+            <li><a href="alarm.html"><button>Alarm</button></a></li>
+        </ul>
+    </header>
+    <div class="main">
+        <h1>Timer</h1>
+        <div class="timer">00 : 00 : 00</div>
+        <input id="hours" type="number" max="12" min="00" placeholder="Hours...">
+        <input id="minutes" type="number" max="59" min="00" placeholder="Minutes...">
+        <input id="seconds" type="number" max="59" min="00" placeholder="Seconds...">
+        <button class="timer-btn" id="timer-btn">Start</button>
+        <audio src="../Audio/timer-sound.mp3" id="timer-sound"></audio>
+    </div>
+    <script src="../JavaScript/timer.js"></script>
+</body>
+
+</html>
