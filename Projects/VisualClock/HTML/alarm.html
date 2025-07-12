@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Clock</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li><a href="stopwatch.html"><button>Stopwatch</button></a></li>
+            <li><a href="timer.html"><button>Timer</button></a></li>
+            <li><a href="../index.html"><button>Clock</button></a></li>
+        </ul>
+    </header>
+    <div class="main">
+        <h1>Alarm</h1>
+        <div class="alarm">00 : 00 <span>&nbsp;AM</span></div>
+        <label for="hour">Hour :</label>
+        <select name="hour" id="hour"></select>
+        <label for="minute">Minute :</label>
+        <select name="minute" id="minute"></select>
+        <!-- <label for="second">Second :</label>
+        <select name="second" id="second"></select> -->
+        <label for="meridian">Meridian :</label>
+        <select name="meridian" id="meridian">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+        </select>
+        <button id="set-alarm">Set</button>
+        <button id="stop-alarm">Stop</button>
+        <audio src="../Audio/alarm-sound.mp3" id="alarm-sound"></audio>
+    </div>
+
+    <script src="../JavaScript/alarm.js"></script>
+</body>
+
+</html>
