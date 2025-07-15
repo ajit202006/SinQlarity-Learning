@@ -30,9 +30,11 @@
             <option value="AM">AM</option>
             <option value="PM">PM</option>
         </select>
-        <button id="set-alarm">Set</button>
-        <button id="stop-alarm">Stop</button>
+        <button id="add-alarm">Add</button>
+        <button id="remove-alarm">Remove</button>
         <audio src="../Audio/alarm-sound.mp3" id="alarm-sound"></audio>
+        <label id="alarm-label" for="alarms">Alarms:</label>
+        <select name="alarms" id="alarm-list"></select>
     </div>
 
     <script src="../JavaScript/alarm.js"></script>
