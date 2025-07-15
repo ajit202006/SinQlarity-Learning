@@ -56,6 +56,8 @@ header ul li a {
     text-align: center;
 }
 
+
+
 .clock,
 .stopwatch,
 .timer,
@@ -72,6 +74,57 @@ header ul li a {
     color: rgb(0, 238, 255);
     box-shadow: rgb(0, 238, 255) 0px 0px 40px 6px;
 }
+
+/* Pendulum Code Start */
+.clock::before,
+.stopwatch::before,
+.timer::before{
+    content: "";
+    color: cyan;
+    background: black;
+    width: 20px;
+    height: 80px;
+    position: absolute;
+    left: 290px;
+    bottom:92px;
+    transform-origin: 50% 0%;
+    animation: clockdial 2s linear infinite;
+}
+.clock::after,
+.stopwatch::after,
+.timer::after{
+    content:"";
+    width: 40px;
+    height: 40px;
+    background: black;
+    border-radius: 50%;
+    position:absolute;
+    bottom:56px;
+    left: 280px;
+    transform-origin: 50% -76.4px;
+    animation: clockdial 2s linear infinite;
+    box-shadow: rgb(0, 238, 255) 0px 0px 25px 4px;
+    z-index: -1;
+}
+
+@keyframes clockdial {
+    0%{
+        transform: rotate(30deg);
+    }
+    25%{
+        transform: rotate(0deg);
+    }
+    50%{
+        transform: rotate(-30deg);
+    }
+    75%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(30deg);
+    }
+}
+/* Pedulum code end */
 
 span {
     position: relative;
