@@ -4,7 +4,10 @@ let minutes = document.getElementById('minutes');
 let seconds = document.getElementById('seconds');
 let timer_btn = document.getElementById('timer-btn');
 let timer_sound=document.getElementById('timer-sound');
+let dropdown_btn3=document.getElementById('dropdown-btn3');
+let header3=document.getElementById('dropdown-list3');
 
+// Setting the timer
 function setTimer(end_time) {
     let time = Math.floor((new Date()).getTime() / 1000);// getting current time in ms
     let remaining_seconds = Math.floor((end_time - time)) % 60;// calculating remaining seconds
@@ -25,6 +28,7 @@ function setTimer(end_time) {
     let remaining_time_string = `${remaining_hours} : ${remaining_minutes} : ${remaining_seconds}`;
     timer.innerHTML = remaining_time_string;
     if (time >= end_time) {
+        alert("Timer complete");
         timer_sound.play();//playing audio after timer goes off
         clearInterval(timer_interval);// stopping execution to prevent negative timer
         stopper=false;// setting stopper to false to make the counter start on click
@@ -74,3 +78,17 @@ timer_btn.addEventListener('click', () => {
         timer_sound.play();//playing audio after timer goes off
     }
 });
+
+let close_flag3=false;
+dropdown_btn3.onclick=()=>{
+    if (close_flag3){
+        header3.style.display='none'
+        dropdown_btn3.innerHTML='Menu';
+        close_flag3=false;
+    }else{
+        
+        header3.style.display='flex';
+        dropdown_btn3.innerHTML='X';
+        close_flag3=true;
+    }
+}
