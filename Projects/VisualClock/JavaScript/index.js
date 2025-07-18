@@ -1,5 +1,7 @@
 let clock=document.querySelector('.clock');
 let clock_btn=document.getElementById('clock-btn');
+let dropdown_btn=document.getElementById('dropdown-btn1');
+let header=document.getElementById('dropdown-list1');
 
 // Creating a clock
 function showTime(flag=false){
@@ -54,3 +56,17 @@ clock_btn.addEventListener("click",()=>{
         flag=true
     }
 });
+
+let close_flag=false;
+dropdown_btn.onclick=()=>{
+    if (close_flag){
+        header.style.display='none';
+        dropdown_btn.innerHTML='Menu';
+        close_flag=false;
+    }else{
+        
+        header.style.display='flex';
+        dropdown_btn.innerHTML='X';
+        close_flag=true;
+    }
+}
