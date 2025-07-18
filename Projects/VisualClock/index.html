@@ -4,26 +4,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual Clock</title>
+    <title>Clock</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <header>
-        <ul>
-            <li><a href="HTML/stopwatch.html"><button>Stopwatch</button></a></li>
-            <li><a href="HTML/timer.html"><button>Timer</button></a></li>
-            <li><a href="HTML/alarm.html"><button>Alarm</button></a></li>
-        </ul>
-    </header>
-    <div class="main">
-        <h1>Clock</h1>
-        <div class="clock">
-        </div>
-        <button class="clock-btn" id="clock-btn">12 Hr Clock</button>
-    </div>
+    <div id="body">
+        <!-- Clock code  -->
+        <section id="clock-section">
+            <header>
+                <button id="dropdown-btn1">Menu</button>
+                <ul id="dropdown-list1">
+                    <li><a href="#stopwatch-section"><button>Stopwatch</button></a></li>
+                    <li><a href="#timer-section"><button>Timer</button></a></li>
+                    <li><a href="#alarm-section"><button>Alarm</button></a></li>
+                </ul>
+            </header>
+            <div class="main">
+                <h1>Clock</h1>
+                <div class="clock">
+                </div>
+                <button class="clock-btn" id="clock-btn">12 Hr Clock</button>
+                <div id="pendulum-string"></div>
+                <div id="pendulum-bob"></div>
+            </div>
 
-    <script src="JavaScript/index.js"></script>
+            <script src="JavaScript/index.js"></script>
+        </section>
+        <!-- Stopwatch code -->
+        <section id="stopwatch-section">
+            <header>
+                <button id="dropdown-btn2">Menu</button>
+                <ul id="dropdown-list2">
+                    <li><a href="#clock-section"><button>Clock</button></a></li>
+                    <li><a href="#timer-section"><button>Timer</button></a></li>
+                    <li><a href="#alarm-section"><button>Alarm</button></a></li>
+                </ul>
+            </header>
+            <div class="main">
+                <h1>Stopwatch</h1>
+                <div class="stopwatch">
+                    00 : 00 : 00 <span>000</span>
+                </div>
+                <div class="stopwatch-ctrl">
+
+                    <button class="stopwatch-btn" id="stopwatch-start">Start</button>
+                    <button class="stopwatch-btn" id="stopwatch-stop">Stop</button>
+                </div>
+                <div id="pendulum-string"></div>
+                <div id="pendulum-bob"></div>
+            </div>
+            <script src="../JavaScript/stopwatch.js"></script>
+        </section>
+        <!-- Timer code -->
+        <section id="timer-section">
+            <header>
+                <button id="dropdown-btn3">Menu</button>
+                <ul id="dropdown-list3">
+                    <li><a href="#stopwatch-section"><button>Stopwatch</button></a></li>
+                    <li><a href="#clock-section"><button>Clock</button></a></li>
+                    <li><a href="#alarm-section"><button>Alarm</button></a></li>
+                </ul>
+            </header>
+            <div class="main">
+                <h1>Timer</h1>
+                <div class="timer">00 : 00 : 00</div>
+                <div class="timer-ctrl">
+                    <input id="hours" type="number" max="12" min="00" placeholder="Hours...">
+                    <input id="minutes" type="number" max="59" min="00" placeholder="Minutes...">
+                    <input id="seconds" type="number" max="59" min="00" placeholder="Seconds...">
+                    <button class="timer-btn" id="timer-btn">Start</button>
+                </div>
+                <audio src="../Audio/timer-sound.mp3" id="timer-sound"></audio>
+                <div id="pendulum-string"></div>
+                <div id="pendulum-bob"></div>
+            </div>
+            <script src="../JavaScript/timer.js"></script>
+        </section>
+        <!-- Alarm Code -->
+        <section id="alarm-section">
+            <header>
+                <button id="dropdown-btn4">Menu</button>
+                <ul id="dropdown-list4">
+                    <li><a href="#stopwatch-section"><button>Stopwatch</button></a></li>
+                    <li><a href="#timer-section"><button>Timer</button></a></li>
+                    <li><a href="#clock-section"><button>Clock</button></a></li>
+                </ul>
+            </header>
+            <div class="main">
+                <h1>Alarm</h1>
+                <div class="alarm">00 : 00 AM</div>
+                <div class="alarm-set">
+                    <div class="1"><label for="hour">Hour :</label>
+                        <select name="hour" id="hour"></select>
+                    </div>
+                    <div class="2"><label for="minute">Minute :</label>
+                        <select name="minute" id="minute"></select>
+                    </div>
+                    <div class="3">
+                        <label for="meridian">Meridian :</label>
+                        <select name="meridian" id="meridian">
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                    </div>
+
+
+
+                </div>
+                <button id="add-alarm">Add</button>
+                <audio src="../Audio/alarm-sound.mp3" id="alarm-sound"></audio>
+                <h2 id="alarm-label">Your Alarms</h2>
+                <ol name="alarms" id="alarm-list"></ol>
+            </div>
+            <script src="JavaScript/alarm.js"></script>
+        </section>
+
+    </div>
 </body>
 
 </html>
