@@ -1,6 +1,8 @@
 let stopwatch=document.querySelector('.stopwatch');
 let start_stopwatch=document.getElementById('stopwatch-start');
 let stop_stopwatch=document.getElementById('stopwatch-stop');
+let dropdown_btn2=document.getElementById('dropdown-btn2');
+let header2=document.getElementById('dropdown-list2');
 
 // Code for stop watch
 let stopwatch_count;
@@ -44,3 +46,16 @@ stop_stopwatch.addEventListener('click',()=>{
     start_stopwatch.innerHTML="Restart";
     start_stopwatch.disabled=false;
 });
+
+let close_flag2=false;
+dropdown_btn2.onclick=()=>{
+    if (close_flag2){
+        header2.style.display='none'
+        dropdown_btn2.innerHTML='Menu';
+        close_flag2=false;
+    }else{      
+        header2.style.display='flex';
+        dropdown_btn2.innerHTML='X';
+        close_flag2=true;
+    }
+}
