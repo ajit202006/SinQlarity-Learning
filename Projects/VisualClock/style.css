@@ -1,32 +1,72 @@
 * {
     margin: 0;
     padding: 0;
+    color: aqua;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+    width: 0;
 }
 
 body {
     width: 100vw;
-    height: 100vh;
     display: flex;
-    justify-content: space-around;
     flex-direction: column;
     align-items: center;
     background: #000;
+    resize: horizontal;
 }
-h1{
-    color: black;
+
+#dropdown-btn1,
+#dropdown-btn2,
+#dropdown-btn3,
+#dropdown-btn4 {
+    display: none;
+}
+
+#body {
+    max-height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+
+}
+
+section {
+    width: 80vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    scroll-snap-align: center;
+}
+
+h1 {
+    color: aqua;
     text-shadow: 0 0 8px rgb(0, 238, 255);
-    margin-bottom: 54px;
+    margin: 40px 0px;
 }
+
 header ul {
     display: flex;
     height: 10vh;
     width: 50vw;
+    margin-top: 20px;
     justify-content: space-around;
     list-style-type: none;
 }
 
 header ul li {
-    margin-top: 10px;
+    margin: 10px 0px;
+    z-index: 2;
+}
+
+header ul li a {
+    height: 50px;
+    width: 150px;
+    text-decoration: none;
+    color: black;
 }
 
 button {
@@ -45,23 +85,20 @@ button:active {
     transform: scale(0.9);
 }
 
-header ul li a {
-    text-decoration: none;
-    color: black;
-
-}
 
 .main {
     align-self: center;
     text-align: center;
+    height: inherit;
+    display: grid;
+    place-items: center;
 }
 
 
 
 .clock,
 .stopwatch,
-.timer,
-.alarm {
+.timer {
     width: 70vw;
     height: 40vh;
     border-radius: 20px;
@@ -75,55 +112,55 @@ header ul li a {
     box-shadow: rgb(0, 238, 255) 0px 0px 40px 6px;
 }
 
+
 /* Pendulum Code Start */
-.clock::before,
-.stopwatch::before,
-.timer::before{
-    content: "";
-    color: cyan;
+#pendulum-string {
     background: black;
     width: 20px;
     height: 80px;
     position: absolute;
-    left: 290px;
-    bottom:92px;
+    left: 154px;
+    bottom: 150px;
     transform-origin: 50% 0%;
     animation: clockdial 2s linear infinite;
+    z-index: 1;
 }
-.clock::after,
-.stopwatch::after,
-.timer::after{
-    content:"";
+
+#pendulum-bob {
     width: 40px;
     height: 40px;
     background: black;
     border-radius: 50%;
-    position:absolute;
-    bottom:56px;
-    left: 280px;
+    position: absolute;
+    left: 144px;
+    bottom: 113px;
     transform-origin: 50% -76.4px;
     animation: clockdial 2s linear infinite;
     box-shadow: rgb(0, 238, 255) 0px 0px 25px 4px;
-    z-index: -1;
 }
 
 @keyframes clockdial {
-    0%{
+    0% {
         transform: rotate(30deg);
     }
-    25%{
+
+    25% {
         transform: rotate(0deg);
     }
-    50%{
+
+    50% {
         transform: rotate(-30deg);
     }
-    75%{
+
+    75% {
         transform: rotate(0deg);
     }
-    100%{
+
+    100% {
         transform: rotate(30deg);
     }
 }
+
 /* Pedulum code end */
 
 span {
@@ -139,11 +176,17 @@ input {
     margin: 0mm 7px;
     text-align: center;
     font-size: 19px;
-    border:none;
+    border: none;
     background: black;
     color: rgb(0, 238, 255);
     box-shadow: rgb(0, 238, 255) 0px 0px 40px 4px;
     outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 #hours {
@@ -154,34 +197,318 @@ input {
     border-radius: 0 10px 10px 0;
 }
 
+
+/*Alarm*/
+.alarm {
+    width: 20vw;
+    height: 10vh;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    font-size: 35px;
+    background: black;
+    color: rgb(0, 238, 255);
+    box-shadow: rgb(0, 238, 255) 0px 0px 40px 6px;
+    animation: blink 2s ease-in-out infinite;
+}
+
 label {
     font-size: 20px;
-    margin-top: 20px;
-    margin-left: 20px;
+    margin: 20px 20px 0px 30px;
 }
 
 select {
     width: 60px;
-    height: 40px;
-    font-size: 18px;
+    height: 50px;
+    font-size: 25px;
     margin-top: 20px;
     background: black;
     color: aqua;
-    box-shadow: rgb(0, 238, 255) 0px 0px 40px 4px;
+    box-shadow: rgb(0, 238, 255) 0px 0px 30px 2px;
     outline: none;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     text-align: center;
 }
 
+.alarm-set {
+    display: flex;
+    align-items: center;
+}
+
 #alarm-list {
-    display: none;
-    width: auto;
-    margin-left: 0px;
+    opacity: 0;
+    width: 350px;
+    height: 150px;
+    font-size: 30px;
+    list-style: none;
+    transition: opacity 1s;
+    box-shadow: rgb(0, 238, 255) 0px 0px 30px 2px;
+    border-radius: 20px;
+    justify-self: center;
+}
+
+#alarm-list li {
+    scroll-snap-align: center;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#alarm-list button {
+    height: 30px;
+    width: 100px;
+    box-shadow: none;
+    color: black;
+    background: aqua;
+    font-weight: bolder;
+    border-radius: 20px;
 }
 
 #alarm-label {
+    opacity: 0;
     display: none;
-    margin-left: -10px;
+    margin: 20px 0;
+    text-shadow: rgb(0, 238, 255) 0px 0px 40px 4px;
+    transition: opacity 1s;
+}
 
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 0.25;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Making responsive*/
+@media screen and (min-width:321px) {
+
+
+
+    header ul {
+        display: flex;
+        height: 10vh;
+        width: 50vw;
+        justify-content: space-around;
+        list-style-type: none;
+        margin-top: 20px;
+    }
+
+    header ul li {
+        margin-top: 10px;
+    }
+
+    header ul li a {
+        text-decoration: none;
+        color: black;
+
+    }
+
+}
+
+@media screen and (max-width:400px) {
+
+    #dropdown-btn1,
+    #dropdown-btn2,
+    #dropdown-btn3,
+    #dropdown-btn4 {
+        width: 100vw;
+        height: 40px;
+        display: inline;
+        color: rgb(0, 238, 255);
+        border:none;
+        font-size: 12px;
+        margin: 0px 3px;
+        box-shadow: rgb(0, 238, 255) 0px 12px 30px -4px;
+    }
+
+    button {
+        width: 150px;
+        height: 30px;
+        background: black;
+        color: rgb(0, 238, 255);
+        border-radius: 10px;
+        border: none;
+        font-size: 12px;
+        margin: 5px 3px;
+        box-shadow: rgb(0, 238, 255) 0px 0px 25px 4px;
+    }
+
+    header ul {
+        height: 40px;
+        width: 100vw;
+        display: none;
+        flex-direction: column;
+        background: none;
+        margin-top: -6px;
+    }
+
+    header ul li {
+        display: block;
+        z-index: 1;
+    }
+    
+    header ul li a {
+        text-decoration: none;
+    }
+
+    #dropdown-list1 button,
+    #dropdown-list2 button,
+    #dropdown-list3 button,
+    #dropdown-list4 button {
+        background: #000;
+        width: 100vw;
+        height: 30px;
+        border-radius: 0px;
+        color: rgb(0, 238, 255);
+        font-size: 12px;
+        box-shadow: none;
+        margin: -6px;
+    }
+
+
+    button:active {
+        transform: scale(0.9);
+    }
+
+    span {
+        position: relative;
+        font-size: 3vh;
+        top: 3vh;
+    }
+
+    .timer-ctrl {
+        height: 30px;
+        width: 60vw;
+        border-radius: 10px;
+        color: rgb(0, 238, 255);
+        box-shadow: rgb(0, 238, 255) 0px 0px 40px 4px;
+    }
+
+    input {
+        height: 30px;
+        width: 20vw;
+        margin: 0px -8px 20px;
+        text-align: center;
+        font-size: 12px;
+        border: none;
+        background: black;
+        outline: none;
+        box-shadow: none;
+    }
+
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    #minutes {
+        box-shadow: none;
+    }
+
+    /*Pendulum code start*/
+    #pendulum-string {
+        display: none;
+    }
+
+    #pendulum-bob {
+        display: none;
+    }
+
+    /*Pendulum code end*/
+    /* Alarm*/
+    .alarm {
+        width: 40vw;
+        height: 10vh;
+        margin-bottom: 40px;
+        border-radius: 20px;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        justify-self: center;
+        font-size: 17px;
+        background: black;
+        color: rgb(0, 238, 255);
+        box-shadow: rgb(0, 238, 255) 0px 0px 40px 6px;
+        animation: blink 2s ease-in-out infinite;
+    }
+
+    .alarm-set {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    label {
+        font-size: 17px;
+        margin: 5px 0px;
+    }
+
+    select {
+        width: 60px;
+        height: 30px;
+        font-size: 17px;
+        margin-top: 0px;
+        background: black;
+        color: aqua;
+        box-shadow: rgb(0, 238, 255) 0px 0px 30px 2px;
+        outline: none;
+        border: none;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    #add-alarm {
+        margin: 20px 0px;
+    }
+
+    #alarm-list {
+        opacity: 0;
+        width: 200px;
+        height: 120px;
+        font-size: 15px;
+        list-style: none;
+        transition: opacity 1s;
+        box-shadow: rgb(0, 238, 255) 0px 0px 30px 2px;
+        border-radius: 20px;
+        justify-self: center;
+    }
+
+    #alarm-list li {
+        scroll-snap-align: center;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #alarm-list button {
+        height: 20px;
+        width: 80px;
+        box-shadow: none;
+        color: black;
+        background: aqua;
+        font-weight: bolder;
+        border-radius: 20px;
+        margin-left: 2px;
+    }
+
+    #alarm-label {
+        opacity: 0;
+        display: none;
+        font-size: 18px;
+        margin: 10px 0;
+        text-shadow: rgb(0, 238, 255) 0px 0px 40px 4px;
+        transition: opacity 1s;
+    }
 }
