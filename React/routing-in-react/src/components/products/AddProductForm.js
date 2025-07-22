@@ -2,7 +2,7 @@ import {useRef} from "react";
 import CustomWrapper from "./CustomWrapper";
 
 
-function AddProductForm() {
+function AddProductForm(props) {
     const product_name_ref=useRef();
     const image_ref=useRef();
     const price_ref=useRef();
@@ -20,7 +20,7 @@ function AddProductForm() {
             description,
             price
         };
-        console.log(product);
+        props.addProductHandler(product);
         
     }
     return (
