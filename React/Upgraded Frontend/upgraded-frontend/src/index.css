@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#root{
+    width: 100vw;
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main {
+  background: black;
+  width: 400px;
+  height: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  width: 200px;
+  height: 200px;
+}
+
+#box1 {
+  background: red;
+  color: gold;
+}
+
+#box2 {
+  background: green;
+  color: greenyellow;
+}
+
+#box3 {
+  background: yellow;
+  color: brown;
+}
+
+#box4 {
+  background: blue;
+  color: whitesmoke;
+}
+
+#element {
+  height: 30px;
+  width: 200px;
+  margin: 10px auto 0px;
+}
+
+.control {
+  width: inherit;
+  height: calc(78% - 296px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.btn {
+  width: 150px;
+  height: 40px;
+  background: rgb(216, 69, 69);
+  color: white;
+  border: 2px solid greenyellow;
+}
+.btn:active{
+  transform: scale(0.9);
+}
