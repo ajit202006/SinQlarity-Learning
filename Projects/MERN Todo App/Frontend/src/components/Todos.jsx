@@ -3,18 +3,24 @@ import Add from './Add';
 import TodoList from './TodoList';
 import { BiNotepad } from "react-icons/bi";
 
-const url = "http://localhost:3000";
+const url = "http://localhost:3000/todos";
 
 const Todos = () => {
-    // const [todos,setTodos]=useState([Something]);
     const [todos, setTodos] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
     const [showComplete, setShowComplete] = useState(false);
-    const [flag, setFlag] = useState("");
+    const [flag, setFlag] = useState(false);
+    const userId=localStorage.getItem("userId");
 
-    useEffect(() => function fetchData() {
+    useEffect(() => {
         setIsFetching(true);
-        fetch(url)
+        fetch(url+ "/fetch", {
+            method:"POST",
+            body: JSON.stringify({ id: userId }),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 setTodos(data.data);
@@ -31,7 +37,7 @@ const Todos = () => {
         } else {
             fetch(url, {
                 method: "POST",
-                body: JSON.stringify({ task: value, isDone: false }),
+                body: JSON.stringify({ id: userId, task: value, isDone: false }),
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -52,10 +58,10 @@ const Todos = () => {
     }
 
     // Deleting a task
-    function deleteTodo(id) {
+    function deleteTodo(index) {
         fetch(url, {
             method: "DELETE",
-            body: JSON.stringify({ id: id }),
+            body: JSON.stringify({ id: userId,index }),
             headers: {
                 "Content-Type": "application/json"
             }
@@ -69,37 +75,37 @@ const Todos = () => {
     }
 
     // Mark task done
-    function setDone(id) {
+    function setDone(index) {
         fetch(url, {
             method: "PUT",
-            body: JSON.stringify({ id }),
+            body: JSON.stringify({ id:userId,index }),
             headers: {
                 "Content-Type": "application/json"
             }
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data.result)
                 setFlag(!flag);
             })
             .catch(err => console.log(err));
     };
+
     // Handle change
-    function handleChange(todo_ref){
+    function handleChange(todo_ref) {
         addTodo(todo_ref.current.value);
-        todo_ref.current.value="";
+        todo_ref.current.value = "";
         setFlag(!flag);
     }
 
     return (
         <>
-            <Add handleChange={handleChange}/>
+            <Add handleChange={handleChange} />
             <div className='flex flex-col h-4/5 items-center'>
                 <h1 className='flex justify-center items-center gap-1 text-[16px] bg-green-700 h-auto p-1 w-full text-white'>
-                    <BiNotepad/>
+                    <BiNotepad />
                     Your Todo List
                 </h1>
-                <button className={`absolute p-2 rounded-full bottom-3 transition-colors duration-600 ${showComplete ? "bg-white text-green-900"  : "bg-green-900 text-white"}`}
+                <button className={`absolute p-2 rounded-full bottom-3 transition-colors duration-600 ${showComplete ? "bg-white text-green-900" : "bg-green-900 text-white"}`}
                     onClick={() => setShowComplete(!showComplete)}>
                     {showComplete ? "All Tasks" : "Incomplete"}
                 </button>
@@ -113,7 +119,6 @@ const Todos = () => {
                 </ol>
             </div>
         </>
-
     );
 }
 
