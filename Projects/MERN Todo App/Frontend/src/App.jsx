@@ -1,15 +1,19 @@
-import Header from './components/Header';
-import Todos from './components/Todos';
+import { Routes, Route } from "react-router-dom";
+import Todo from './pages/Todo';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import Home from './pages/Home';
+
 // import ContextTodos from './components/Todos';
 function App() {
   return (
-      <div className='w-screen bg-emerald-100 h-screen flex items-center justify-center'>
-        <div className='md:w-2/3 md:h-6/7 w-screen h-screen bg-green-300 md:rounded-2xl relative overflow-hidden'>
-          <Header />
-          <Todos/>
-        </div>
-      </div>
-    
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/todos" element={<Todo />} />
+    </Routes>
+
   )
 }
 
