@@ -66,6 +66,12 @@ const updateQuiz = async (req: Request, res: Response, next: NextFunction) => {
             throw err;
         }
 
+        if (quiz.is_published){
+            const err = new ProjectError("Cannot update. Quiz already published.");
+            err.statusCode= 405;
+            throw err;
+        }
+
         quiz.name = req.body.name;
         quiz.questions_list = req.body.questions_list;
         quiz.answers = req.body.answers;
@@ -91,6 +97,12 @@ const deleteQuiz = async (req: Request, res: Response, next: NextFunction) => {
         if (quiz?.created_by.toString() !== req.userId) {
             const err = new ProjectError("Unauthorized user");
             err.statusCode = 403;
+            throw err;
+        }
+
+         if (quiz.is_published){
+            const err = new ProjectError("Cannot Delete. Quiz already published.");
+            err.statusCode= 405;
             throw err;
         }
 
