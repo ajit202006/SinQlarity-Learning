@@ -4,6 +4,7 @@ import mongoose, { SetExpressionOperatorReturningBoolean } from "mongoose";
 import userRouter from "./routes/user";
 import authRouter from "./routes/auth";
 import quizRouter from "./routes/quiz";
+import examRouter from "./routes/exam";
 import ProjectError from "./helper/ProjectError";
 
 const app = express();
@@ -36,6 +37,9 @@ app.use("/auth", authRouter);
 
 // redirectiing /quiz request to quizRouter
 app.use("/quiz",quizRouter);
+
+// redirectiing /quiz request to examRouter
+app.use("/exam",examRouter);
 
 app.use((err:ProjectError,req:Request,res:Response,next:NextFunction)=>{
     let resp:ReturnResponse;
