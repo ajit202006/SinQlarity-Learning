@@ -2,16 +2,9 @@ import { NextFunction, Request, Response } from "express";
 import bcrypt from 'bcryptjs';
 import jwt from "jsonwebtoken";
 import { validationResult } from "express-validator";
-
 import User from "../models/user";
 import ProjectError from "../helper/ProjectError";
-
-// Response 
-interface ReturnResponse {
-    status: "success" | "error",
-    message: String,
-    data: {} | []
-}
+import { ReturnResponse } from "../util/interfaces";
 
 const registerUser = async (req: Request, res: Response, next: NextFunction) => {
     let resp: ReturnResponse;
@@ -27,7 +20,6 @@ const registerUser = async (req: Request, res: Response, next: NextFunction) => 
         const name = req.body.name;
         const password = await bcrypt.hash(req.body.password, 12);
 
-
         const user = new User({ name, email, password });
         const result = await user.save();
         if (!result) {
@@ -41,9 +33,8 @@ const registerUser = async (req: Request, res: Response, next: NextFunction) => 
         next(error);
     }
 }
+
 const loginUser = async (req: Request, res: Response, next: NextFunction) => {
-
-
     let resp: ReturnResponse;
     try {
         const email = req.body.email;
@@ -67,18 +58,14 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
             err.statusCode = 401;
             throw err;
         }
-
-
     } catch (error) {
         next(error);
     }
 }
 
 const isUserExist = async (email: String) => {
-    console.log("email is ", email);
     const user = await User.findOne({ email });
-    console.log("Userid =" , user);
-    if (!user){
+    if (!user) {
         return false;
     }
     return true;
