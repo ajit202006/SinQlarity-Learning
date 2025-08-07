@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import Quiz from "../models/quiz";
 import ProjectError from "../helper/ProjectError";
-import { couldStartTrivia } from "typescript";
+import { validationResult } from "express-validator";
 
 interface ReturnResponse {
     status: "success" | "error",
@@ -11,7 +11,15 @@ interface ReturnResponse {
 
 const createQuiz = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        console.log(req.userId);
+        const validationError= validationResult(req);
+
+        if (!validationError.isEmpty()){
+            const err = new ProjectError("Validation failed!");
+            err.statusCode = 422;
+            err.data= validationError.array();
+            throw err;
+        }
+        
         const created_by = req.userId;
         const name = req.body.name;
         const questions_list = req.body.questions_list;
@@ -51,6 +59,16 @@ const getQuiz = async (req: Request, res: Response, next: NextFunction) => {
 
 const updateQuiz = async (req: Request, res: Response, next: NextFunction) => {
     try {
+
+        const validationError= validationResult(req);
+
+        if (!validationError.isEmpty()){
+            const err = new ProjectError("Validation failed!");
+            err.statusCode = 422;
+            err.data= validationError.array();
+            throw err;
+        }
+        
         const quizId = req.body._id;
         const quiz = await Quiz.findById(quizId);
 
