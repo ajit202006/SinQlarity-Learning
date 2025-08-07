@@ -1,15 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import ProjectError from "../helper/ProjectError";
 import User from "../models/user";
-
-// Response 
-interface ReturnResponse {
-    status: "success" | "error",
-    message: String,
-    data: {} | []
-}
-
-// execute /user queries
+import ProjectError from "../helper/ProjectError";
+import { ReturnResponse } from "../util/interfaces";
 
 const getUser = async (req: Request, res: Response,next:NextFunction) => {
     let resp: ReturnResponse;
@@ -35,6 +27,7 @@ const getUser = async (req: Request, res: Response,next:NextFunction) => {
         next(error);
     }
 }
+
 const updateUser = async (req: Request, res: Response,next:NextFunction) => {
     let resp: ReturnResponse;
     try {
