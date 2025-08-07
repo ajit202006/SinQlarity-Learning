@@ -1,11 +1,14 @@
 import express,{Request,Response,NextFunction} from "express";
-import mongoose, { SetExpressionOperatorReturningBoolean } from "mongoose";
+import mongoose from "mongoose";
 
 import userRouter from "./routes/user";
 import authRouter from "./routes/auth";
 import quizRouter from "./routes/quiz";
 import examRouter from "./routes/exam";
+import reportRouter from "./routes/report";
+
 import ProjectError from "./helper/ProjectError";
+import { ReturnResponse } from "./util/interfaces";
 
 const app = express();
 const connectionString = process.env.CONNECTION_STRING || "" ;
@@ -18,15 +21,9 @@ declare global{
     }
 }
 
-interface ReturnResponse {
-    status: "success" | "error",
-    message: String,
-    data: {} | []
-}
-
 app.use(express.json());
 app.get("/", (req, res) => {
-    res.send("Hello");
+    res.send("Server is working");
 })
 
 // redirecting /user request to userRouter
@@ -35,11 +32,14 @@ app.use("/user", userRouter);
 // redirecting /auth request to userRouter
 app.use("/auth", authRouter);
 
-// redirectiing /quiz request to quizRouter
+// redirecting /quiz request to quizRouter
 app.use("/quiz",quizRouter);
 
-// redirectiing /quiz request to examRouter
+// redirecting /exam request to examRouter
 app.use("/exam",examRouter);
+
+// redirecting /report request to reportRouter
+app.use("/report",reportRouter);
 
 app.use((err:ProjectError,req:Request,res:Response,next:NextFunction)=>{
     let resp:ReturnResponse;
@@ -56,7 +56,6 @@ app.use((err:ProjectError,req:Request,res:Response,next:NextFunction)=>{
     if (!!err.data){
         resp.data= err.data;
     }
-    console.log("Reached here first");
     console.log(err.statusCode,err.message);
     res.status(statusCode).send(resp);
 })
