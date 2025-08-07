@@ -1,25 +1,20 @@
 import { NextFunction, Request, Response } from "express";
+import { validationResult } from "express-validator";
 import Quiz from "../models/quiz";
 import ProjectError from "../helper/ProjectError";
-import { validationResult } from "express-validator";
-
-interface ReturnResponse {
-    status: "success" | "error",
-    message: String,
-    data: {} | []
-}
+import { ReturnResponse } from "../util/interfaces";
 
 const createQuiz = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const validationError= validationResult(req);
+        const validationError = validationResult(req);
 
-        if (!validationError.isEmpty()){
+        if (!validationError.isEmpty()) {
             const err = new ProjectError("Validation failed!");
             err.statusCode = 422;
-            err.data= validationError.array();
+            err.data = validationError.array();
             throw err;
         }
-        
+
         const created_by = req.userId;
         const name = req.body.name;
         const questions_list = req.body.questions_list;
@@ -32,7 +27,6 @@ const createQuiz = async (req: Request, res: Response, next: NextFunction) => {
     } catch (error) {
         next(error);
     }
-
 }
 
 const getQuiz = async (req: Request, res: Response, next: NextFunction) => {
@@ -44,7 +38,6 @@ const getQuiz = async (req: Request, res: Response, next: NextFunction) => {
             err.statusCode = 404;
             throw err;
         }
-
         if (quiz.created_by.toString() !== req.userId) {
             const err = new ProjectError("Unauthorized user");
             err.statusCode = 403;
@@ -59,37 +52,31 @@ const getQuiz = async (req: Request, res: Response, next: NextFunction) => {
 
 const updateQuiz = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        const validationError = validationResult(req);
 
-        const validationError= validationResult(req);
-
-        if (!validationError.isEmpty()){
+        if (!validationError.isEmpty()) {
             const err = new ProjectError("Validation failed!");
             err.statusCode = 422;
-            err.data= validationError.array();
+            err.data = validationError.array();
             throw err;
         }
-        
         const quizId = req.body._id;
         const quiz = await Quiz.findById(quizId);
-
         if (!quiz) {
             const err = new ProjectError("Quiz Not Found");
             err.statusCode = 404;
             throw err;
         }
-
         if (quiz.created_by.toString() !== req.userId) {
             const err = new ProjectError("Unauthorized user");
             err.statusCode = 403;
             throw err;
         }
-
-        if (quiz.is_published){
+        if (quiz.is_published) {
             const err = new ProjectError("Cannot update. Quiz already published.");
-            err.statusCode= 405;
+            err.statusCode = 405;
             throw err;
         }
-
         quiz.name = req.body.name;
         quiz.questions_list = req.body.questions_list;
         quiz.answers = req.body.answers;
@@ -105,25 +92,21 @@ const deleteQuiz = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const quizId = req.params.quizId;
         const quiz = await Quiz.findById(quizId);
-
         if (!quiz) {
             const err = new ProjectError("Quiz Not Found");
             err.statusCode = 404;
             throw err;
         }
-
         if (quiz?.created_by.toString() !== req.userId) {
             const err = new ProjectError("Unauthorized user");
             err.statusCode = 403;
             throw err;
         }
-
-         if (quiz.is_published){
+        if (quiz.is_published) {
             const err = new ProjectError("Cannot Delete. Quiz already published.");
-            err.statusCode= 405;
+            err.statusCode = 405;
             throw err;
         }
-
         await Quiz.deleteOne({ _id: quizId });
         const resp: ReturnResponse = { status: "success", message: "Quiz Deleted", data: {} };
         res.send(resp);
@@ -149,7 +132,6 @@ const publishQuiz = async (req: Request, res: Response, next: NextFunction) => {
     } catch (error) {
         next(error);
     }
-
 }
 
 export { createQuiz, getQuiz, updateQuiz, deleteQuiz, publishQuiz };
