@@ -1,8 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { flattenDiagnosticMessageText } from "typescript";
 
-
-// Schema=> Architecture
 const quizSchema = new Schema(
     {
         name: {
@@ -34,7 +31,6 @@ const quizSchema = new Schema(
     { timestamps: true }
 )
 
-// Model => naem of table in singular name of collectioin automatically gets plural
 const Quiz = mongoose.model("Quiz", quizSchema);
 
 // exporting schema
