@@ -17,6 +17,7 @@ router.post("/", [
     body("email")
         .trim()
         .isEmail()
+        .withMessage("Email should contain an '@' symbol and a valid domain name")
         .normalizeEmail()
         .custom((emailID:String) => {
             return isUserExist(emailID)
@@ -38,7 +39,7 @@ router.post("/", [
     .trim()
     .custom((value,{req})=>{
         if (value!=req.body.password){
-            return Promise.reject("Password Mismatch");
+            return Promise.reject("confirm_password should be same as password");
         }
         return true;
     })
