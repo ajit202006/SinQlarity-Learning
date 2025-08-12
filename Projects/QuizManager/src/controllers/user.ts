@@ -37,7 +37,7 @@ const updateUser = async (req: Request, res: Response,next:NextFunction) => {
             err.statusCode = 401;
             throw err;
         }
-        const user = await User.findById(userId);
+        const user = await User.findById(userId,{name:1,email:1,updatedAt:1});
         user ? user.name = req.body.name : undefined;
         await user?.save()
         if (!user) {
