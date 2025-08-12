@@ -121,7 +121,7 @@ const publishQuiz = async (req: Request, res: Response, next: NextFunction) => {
         const quizId = req.body.quizId;
         const quiz = await Quiz.findById(quizId);
         if (!quiz) {
-            const err = new ProjectError("QUiz not found");
+            const err = new ProjectError("Quiz not found");
             err.statusCode = 404;
             throw err;
         }
