@@ -24,8 +24,6 @@ router.post('/', isAuthenticated, [
 
     body("answers")
         .custom((value, { req }) => {
-            console.log("answers", Object.keys(value).length);
-            console.log("Questions ", req.body.questions_list.length);
             if (Object.keys(value).length !== req.body.questions_list.length) {
                 return Promise.reject("'Answers' does not match 'Questions List'")
             }
