@@ -30,12 +30,17 @@ const submitExam = async (req: Request, res: Response, next: NextFunction) => {
         const attempted_questions = req.body.attempted_questions;
         const quizId = req.body.quizId;
 
-        const quiz = await Quiz.findById(quizId, { answers: 1 });
+        const quiz = await Quiz.findById(quizId, { answers: 1, created_by: 1 });
         const answers = quiz?.answers;
         const userId = req.userId;
         const allQuestions = Object.keys(answers);
         const total = allQuestions.length;
-
+        
+        if (userId === quiz?.created_by.toString()) {
+            const err = new ProjectError("You cannot submit your own quiz.");
+            err.statusCode = 405;
+            throw err;
+        }
         let score = 0;
         for (let i = 0; i < total; i++) {
             let question_number = allQuestions[i]
